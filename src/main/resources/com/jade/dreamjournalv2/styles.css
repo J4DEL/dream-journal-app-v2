@@ -1,0 +1,58 @@
+/* --- THE BACKGROUND --- */
+.root {
+    -fx-background-color: #121216; /* Deep, slightly cool dark grey */
+}
+
+/* --- THE PASSWORD FIELD (Rounded & Minimal) --- */
+.password-field {
+    -fx-background-color: #1e1e24;
+    -fx-text-fill: #ffffff;
+
+    /* This makes it beautifully rounded / pill-shaped */
+    -fx-background-radius: 20px;
+    -fx-border-radius: 20px;
+
+    -fx-border-color: transparent; /* No border until you click it */
+    -fx-padding: 8px 15px;
+
+    /* Clean, modern, non-hacker font */
+    -fx-font-family: "Segoe UI", "Helvetica", sans-serif;
+    -fx-font-size: 14px;
+}
+
+/* When you click inside to type */
+.password-field:focused {
+    -fx-border-color: #b388ff; /* Soft lavender/purple glow */
+    -fx-border-width: 1.5px;
+}
+
+/* --- THE UNLOCK BUTTON (Smaller & Pill-Shaped) --- */
+.button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #b388ff;
+    -fx-border-color: #b388ff;
+    -fx-border-width: 1.5px;
+
+    /* Perfectly rounded edges */
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+
+    /* SMALLER PADDING = SMALLER BUTTON */
+    -fx-padding: 4px 18px;
+
+    -fx-font-family: "Segoe UI", "Helvetica", sans-serif;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+/* When you hover over the button */
+.button:hover {
+    -fx-background-color: #b388ff;
+    -fx-text-fill: #121216; /* Dark text when hovered */
+}
+
+/* --- THE LABEL (Bold & Modern) --- */
+.label {
+    -fx-font-family: "Segoe UI", "Helvetica", sans-serif;
+    -fx-font-weight: bold;
+}
