@@ -1,58 +1,151 @@
-/* --- THE BACKGROUND --- */
+/* ======================================================= */
+/* MADJS V2 MASTER STYLESHEET                             */
+/* Theme: Dark Obsidian & Lavender Glow                   */
+/* ======================================================= */
+
+/* --- 1. GLOBAL APP BACKGROUND --- */
 .root {
-    -fx-background-color: #121216; /* Deep, slightly cool dark grey */
-}
-
-/* --- THE PASSWORD FIELD (Rounded & Minimal) --- */
-.password-field {
-    -fx-background-color: #1e1e24;
-    -fx-text-fill: #ffffff;
-
-    /* This makes it beautifully rounded / pill-shaped */
-    -fx-background-radius: 20px;
-    -fx-border-radius: 20px;
-
-    -fx-border-color: transparent; /* No border until you click it */
-    -fx-padding: 8px 15px;
-
-    /* Clean, modern, non-hacker font */
+    -fx-background-color: #121216;
     -fx-font-family: "Segoe UI", "Helvetica", sans-serif;
-    -fx-font-size: 14px;
 }
 
-/* When you click inside to type */
-.password-field:focused {
-    -fx-border-color: #b388ff; /* Soft lavender/purple glow */
-    -fx-border-width: 1.5px;
+/* --- 2. LABELS (Titles, Hours Slept, Mood) --- */
+.label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18px; /* Slightly upscaled for readability */
+    -fx-font-weight: bold;
 }
 
-/* --- THE UNLOCK BUTTON (Smaller & Pill-Shaped) --- */
+/* --- 3. STANDARD BUTTONS (Save Dream, Login) --- */
 .button {
     -fx-background-color: transparent;
     -fx-text-fill: #b388ff;
     -fx-border-color: #b388ff;
-    -fx-border-width: 1.5px;
-
-    /* Perfectly rounded edges */
-    -fx-border-radius: 20px;
-    -fx-background-radius: 20px;
-
-    /* SMALLER PADDING = SMALLER BUTTON */
-    -fx-padding: 4px 18px;
-
-    -fx-font-family: "Segoe UI", "Helvetica", sans-serif;
+    -fx-border-width: 2px;
+    -fx-border-radius: 25px; /* Perfect pill shape */
+    -fx-background-radius: 25px;
+    -fx-padding: 10px 35px; /* Makes the button thicker and wider */
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
     -fx-cursor: hand;
 }
-
-/* When you hover over the button */
 .button:hover {
     -fx-background-color: #b388ff;
-    -fx-text-fill: #121216; /* Dark text when hovered */
+    -fx-text-fill: #121216; /* Inverts text to dark when hovered */
 }
 
-/* --- THE LABEL (Bold & Modern) --- */
-.label {
-    -fx-font-family: "Segoe UI", "Helvetica", sans-serif;
+/* --- 4. TEXT FIELDS & PASSWORD BOXES (Short inputs) --- */
+.text-field, .password-field {
+    -fx-background-color: #1e1e24;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 8px; /* Smooth, slightly rounded edges */
+    -fx-border-radius: 8px;
+    -fx-border-color: #333333;
+    -fx-border-width: 1.5px;
+    -fx-padding: 10px 15px;
+    -fx-font-size: 16px;
+}
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #b388ff; /* Purple glow when typing */
+}
+
+/* --- 5. THE MAIN DREAM CANVAS (TextArea) --- */
+.text-area {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px; /* Large, comfortable writing font */
+    -fx-padding: 0;
+}
+.text-area .content {
+    -fx-background-color: #1e1e24;
+    -fx-background-radius: 12px;
+}
+.text-area:focused .content {
+    -fx-border-color: #b388ff;
+    -fx-border-width: 2px;
+    -fx-border-radius: 12px;
+}
+/* Hides the ugly default JavaFX background layers */
+.text-area .viewport, .text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+/* --- 6. THE SCROLLBAR FIX --- */
+.scroll-bar:vertical .track, .scroll-bar:vertical .track-background {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #333333;
+    -fx-background-radius: 5px;
+}
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #b388ff;
+}
+/* Nukes the Windows 95 arrows */
+.scroll-bar:vertical .increment-button, .scroll-bar:vertical .decrement-button,
+.scroll-bar:vertical .increment-arrow, .scroll-bar:vertical .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+.corner {
+    -fx-background-color: transparent;
+}
+
+/* --- 7. LUCID CHECKBOX --- */
+.check-box {
+    -fx-text-fill: #b388ff;
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
+}
+.check-box .box {
+    -fx-background-color: #1e1e24;
+    -fx-border-color: #b388ff;
+    -fx-border-width: 2px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+}
+.check-box:selected .box {
+    -fx-background-color: #b388ff;
+}
+.check-box:selected .mark {
+    -fx-background-color: #121216; /* Dark checkmark */
+    -fx-shape: "M1.73,12.91 8.1,19.28 22.79,4.59"; /* Perfect vector checkmark */
+    -fx-padding: 6px;
+}
+
+/* --- 8. MOOD DROPDOWNS (ComboBox) --- */
+.combo-box {
+    -fx-background-color: #1e1e24;
+    -fx-border-color: #333333;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+.combo-box:focused {
+    -fx-border-color: #b388ff;
+}
+.combo-box .list-cell {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-background-color: transparent;
+}
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+}
+.combo-box .arrow {
+    -fx-background-color: #b388ff; /* Purple dropdown arrow */
+}
+/* The popup list that appears when you click the dropdown */
+.combo-box-popup .list-view {
+    -fx-background-color: #121216;
+    -fx-border-color: #b388ff;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+}
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #b388ff;
+    -fx-text-fill: #121216;
 }

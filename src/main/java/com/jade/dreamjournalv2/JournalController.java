@@ -10,13 +10,25 @@ public class JournalController {
 
     @FXML
     protected void onEnterClick() {
-        // Grab the text from the password box
         String enteredPassword = passwordInput.getText();
 
-        // For testing ONLY: Print it to the console so we know it works
-        System.out.println("Vault checking password: " + enteredPassword);
+        try {
+            // A fake dream to test
+            String myDream = "I was flying over Night City and realized I was dreaming!";
 
-        // We will eventually delete this print statement because
-        // printing passwords is a cybersecurity sin!
+            System.out.println("--- TESTING CRYPTO ENGINE ---");
+            System.out.println("Original: " + myDream);
+
+            // Lock it!
+            String lockedDream = CryptoManager.encrypt(myDream, enteredPassword);
+            System.out.println("Encrypted Package: " + lockedDream);
+
+            // Unlock it!
+            String unlockedDream = CryptoManager.decrypt(lockedDream, enteredPassword);
+            System.out.println("Decrypted: " + unlockedDream);
+
+        } catch (Exception e) {
+            System.out.println("Crypto failed: " + e.getMessage());
+        }
     }
 }
