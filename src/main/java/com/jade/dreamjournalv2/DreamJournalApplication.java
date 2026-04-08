@@ -14,6 +14,8 @@ public class DreamJournalApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 400, 400);
         stage.setTitle("Dream Journal");
         stage.setScene(scene);
+        // Initialize the database before showing the UI
+        DatabaseManager.initializeDatabase();
         stage.show();
     }
 }
