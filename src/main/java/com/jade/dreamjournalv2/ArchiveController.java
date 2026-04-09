@@ -16,6 +16,8 @@ public class ArchiveController {
     // --- 2. BOOT UP SEQUENCE ---
     @FXML
     public void initialize() {
+
+        dreamReader.setWrapText(true);
         // 1. Fetch all dreams from the database
         java.util.List<DreamEntry> dreams = DatabaseManager.getAllDreams();
 
