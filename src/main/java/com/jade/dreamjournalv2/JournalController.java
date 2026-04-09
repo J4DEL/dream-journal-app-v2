@@ -72,10 +72,10 @@ public class JournalController {
     private void loadDashboard() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(DreamJournalApplication.class.getResource("vault-view.fxml"));
-            Scene vaultScene = new Scene(fxmlLoader.load());
-            Stage stage = (Stage) passwordInput.getScene().getWindow();
-            stage.setScene(vaultScene);
-            stage.setMaximized(true);
+
+            // THE MAGIC TRICK: Swap the root canvas instead of building a new window!
+            passwordInput.getScene().setRoot(fxmlLoader.load());
+
         } catch (Exception e) {
             System.out.println("Error loading vault: " + e.getMessage());
         }
