@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
@@ -13,17 +14,97 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jade.dreamjournalv2.VaultController">
    <children>
-      <TextArea fx:id="dreamInput" layoutX="27.0" layoutY="27.0" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="27.0">
+      <TextArea fx:id="dreamInput" layoutX="27.0" layoutY="27.0" wrapText="true" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="27.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextArea>
-      <VBox layoutX="855.0" layoutY="27.0" prefHeight="297.0" prefWidth="335.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="27.0">
+      <AnchorPane layoutX="27.0" layoutY="519.0" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="300.0">
          <children>
+            <VBox>
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="794.0">
+                     <children>
+                        <Label prefHeight="42.0" prefWidth="137.0" text="Dream Signs: " textFill="WHITE" />
+                        <TextField fx:id="signsInput" prefHeight="48.0" prefWidth="656.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefHeight="23.0" prefWidth="137.0" text="Environment:" textFill="WHITE" />
+                        <TextField fx:id="environmentInput" prefHeight="48.0" prefWidth="286.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </TextField>
+                        <Label prefHeight="23.0" prefWidth="83.0" text="Themes:" textFill="WHITE" />
+                        <TextField fx:id="themesInput" prefHeight="48.0" prefWidth="268.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label prefHeight="28.0" prefWidth="165.0" text="False Awakenings:" textFill="WHITE" />
+                        <TextField fx:id="fAwakenInput" alignment="CENTER" prefHeight="42.0" prefWidth="58.0" />
+                     </children>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <VBox layoutX="855.0" layoutY="27.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="27.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="335.0">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="117.0" text="Dream Title:" textFill="WHITE" />
+                  <TextField fx:id="dreamTitleInput" alignment="CENTER" prefHeight="42.0" prefWidth="195.0" />
+               </children>
+            </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="284.0">
                <children>
                   <Label prefHeight="44.0" prefWidth="112.0" text="Hours Slept:" textFill="WHITE" />
-                  <TextField fx:id="hoursInput" alignment="CENTER" prefHeight="28.0" prefWidth="60.0" />
+                  <TextField fx:id="hoursInput" alignment="CENTER" prefHeight="42.0" prefWidth="55.0">
+                     <HBox.margin>
+                        <Insets right="14.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Label prefHeight="44.0" prefWidth="75.0" text="Quality:" textFill="WHITE" />
+                  <TextField fx:id="qualityInput" alignment="CENTER" prefHeight="42.0" prefWidth="55.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="284.0">
+               <children>
+                  <Label prefHeight="44.0" prefWidth="60.0" text="Time:" textFill="WHITE" />
+                  <TextField fx:id="sleepTimeInput" alignment="CENTER" prefHeight="42.0" prefWidth="90.0">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+                  <Label alignment="CENTER" prefHeight="44.0" prefWidth="71.0" text="to" textFill="WHITE" />
+                  <TextField fx:id="wakeTimeInput" alignment="CENTER" prefHeight="28.0" prefWidth="90.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="284.0">
@@ -38,20 +119,54 @@
                   <ComboBox fx:id="moodAfterInput" prefHeight="33.0" prefWidth="140.0" />
                </children>
             </HBox>
-            <CheckBox fx:id="lucidToggle" mnemonicParsing="false" prefHeight="70.0" prefWidth="284.0" text="Lucid Dream" />
+            <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="284.0">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="139.0" text="Method Used:" textFill="WHITE" />
+                  <ComboBox fx:id="methodUsedInput" prefHeight="33.0" prefWidth="175.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="335.0">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="116.0" text="Substances:" textFill="WHITE" />
+                  <TextField fx:id="substanceInput" alignment="CENTER" prefHeight="42.0" prefWidth="204.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="69.0" prefWidth="335.0">
+               <children>
+                  <CheckBox fx:id="lucidToggle" mnemonicParsing="false" prefHeight="69.0" prefWidth="150.0" text="Lucid Dream">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="wetToggle" mnemonicParsing="false" prefHeight="69.0" prefWidth="150.0" text="Wet Dream" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="69.0" prefWidth="335.0">
+               <children>
+                  <CheckBox fx:id="normToggle" mnemonicParsing="false" prefHeight="69.0" prefWidth="181.0" text="Normal Dream">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="nightmareToggle" mnemonicParsing="false" prefHeight="69.0" prefWidth="150.0" text="Nightmare" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="69.0" prefWidth="335.0">
+               <children>
+                  <CheckBox fx:id="madsToggle" mnemonicParsing="false" prefHeight="69.0" prefWidth="150.0" text="Madison">
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </CheckBox>
+                  <CheckBox fx:id="paralysisToggle" mnemonicParsing="false" prefHeight="69.0" prefWidth="150.0" text="Paralysis" />
+               </children>
+            </HBox>
          </children>
       </VBox>
-      <HBox alignment="CENTER_LEFT" layoutX="27.0" layoutY="519.0" prefHeight="48.0" prefWidth="793.0" AnchorPane.bottomAnchor="233.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="380.0">
-         <children>
-            <Label prefHeight="23.0" prefWidth="150.0" text="Dream Signs: " textFill="WHITE" />
-            <TextField fx:id="signsInput" prefHeight="36.0" prefWidth="698.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-         </children>
-      </HBox>
-      <HBox alignment="CENTER" layoutX="518.0" layoutY="688.0" prefHeight="57.0" prefWidth="165.0" AnchorPane.bottomAnchor="55.0" AnchorPane.leftAnchor="518.0" AnchorPane.rightAnchor="517.0">
+      <HBox alignment="CENTER" layoutX="518.0" layoutY="705.0" prefHeight="57.0" prefWidth="165.0" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="518.0" AnchorPane.rightAnchor="517.0">
          <children>
             <Button alignment="CENTER" mnemonicParsing="false" onAction="#onSaveClick" prefHeight="53.0" prefWidth="168.0" text="Save Dream" />
          </children>

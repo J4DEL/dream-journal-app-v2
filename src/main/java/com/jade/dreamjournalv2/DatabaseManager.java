@@ -10,7 +10,10 @@ public class DatabaseManager {
     // The path where your database file will be created
     private static final String DB_URL = "jdbc:sqlite:madjs_data.db";
 
-    // 1. Method to connect to the database
+    /**
+     * Method to establish a connection to the SQLite database.
+     * @return
+     */
     public static Connection connect() {
         Connection conn = null;
         try {
@@ -22,28 +25,124 @@ public class DatabaseManager {
         return conn;
     }
 
-    // 2. Method to build the vault structure
+    /**
+     * Method to initialize the database with the necessary table structure for storing dreams.
+     * This method creates a table called 'dreams' with columns for:
+     * - id: A unique identifier for each dream (auto-incremented)
+     * - content: The encrypted dream text (cannot be null)
+     * - is_lucid: A boolean to track if the dream was lucid or not (cannot be null)
+     * - date_logged: A timestamp of when the dream was saved (auto-stamped with the current date and time)
+     * - hours_slept: An integer to track how many hours I slept before the dream
+     * - mood_before_sleep: A text field to track my mood before sleeping
+     * - mood_after_sleep: A text field to track my mood after waking up
+     * - dream_signs: A text field to track any dream signs I noticed in the dream
+     * - method_used: A text field to track which lucid dreaming method I used (if any)
+     * - substances: A text field to track any substances I consumed before sleeping (e.g. vyvanse, alcohol, zaza)
+     * - environment: A text field to track the sleeping environment (e.g. room temperature, noise level, bedding)
+     * - themes: A text field to track recurring themes in my dreams (e.g. flying, being chased, school)
+     * - false_awakenings: An integer to track how many times I experienced false awakenings in the dream
+     * - is_normal: A boolean to track if the dream was a normal non-lucid dream
+     * - is_nightmare: A boolean to track if the dream was a nightmare
+     * - is_wet: A boolean to track wet dreams
+     * - mads: A boolean to track if I experienced MADs (my version of sleep paralysis hallucinations) in the dream
+     * - paralysis: A boolean to track if I experienced sleep paralysis in the dream
+     * - date_logged: A timestamp to track when the dream was logged (auto-stamped with the current date and time)
+     */
     public static void initializeDatabase() {
         String sql = "CREATE TABLE IF NOT EXISTS dreams (\n"
-                + " id INTEGER PRIMARY KEY AUTOINCREMENT,\n" // Gives every dream a unique number
-                + " content TEXT NOT NULL,\n"               // Where the encrypted dream goes
-                + " is_lucid BOOLEAN NOT NULL,\n"            // True/False for your analytics
-                + " date_logged DATETIME DEFAULT CURRENT_TIMESTAMP,\n" // Auto-stamps the date
-                + " hours_slept INTEGER,\n" // Track how many hours I slept
-                + " mood_before_sleep TEXT,\n" // Track my mood before sleeping
-                + " mood_after_sleep TEXT,\n" // Track mood after waking up
-                + " dream_signs TEXT,\n" // Track dream signs
+                + " id INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                + " content TEXT NOT NULL,\n"
+                + " title TEXT,\n"
+                + " hours_slept INTEGER,\n"
+                + " quality INTEGER,\n"
+                + " sleep_time TEXT,\n"
+                + " wake_time TEXT,\n"
+                + " mood_before TEXT,\n"
+                + " mood_after TEXT,\n"
+                + " method_used TEXT,\n"
+                + " substances TEXT,\n"
+                + " dream_signs TEXT,\n"
+                + " environment TEXT,\n"
+                + " themes TEXT,\n"
+                + " false_awakenings INTEGER,\n"
+                + " is_lucid BOOLEAN,\n"
+                + " is_normal BOOLEAN,\n"
+                + " is_nightmare BOOLEAN,\n"
+                + " is_wet BOOLEAN,\n"
+                + " mads BOOLEAN,\n"
+                + " paralysis BOOLEAN,\n"
+                + " date_logged DATETIME DEFAULT CURRENT_TIMESTAMP\n"
                 + ");";
 
-        // Try to connect and execute the SQL
-        try (Connection conn = connect();
-             Statement stmt = conn.createStatement()) {
-
+        try (Connection conn = connect(); Statement stmt = conn.createStatement()) {
             stmt.execute(sql);
-            System.out.println("Vault database is secure and ready!");
-
+            System.out.println("Mega-Vault database is secure and ready!");
         } catch (SQLException e) {
             System.out.println("Error creating table: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Method to insert a new dream entry into the database. This method takes in all the relevant data about the dream and saves it as a new record in the 'dreams' table.
+     * @param content The encrypted dream text to be stored in the database (cannot be null)
+     * @param title The title of the dream
+     * @param hours The hours slept
+     * @param quality The quality of sleep out of 10
+     * @param sleepTime Time I slept
+     * @param wakeTime Time I woke up
+     * @param moodB Mood after wake
+     * @param moodA Mood before sleep
+     * @param method Lucid dream method
+     * @param subs Substances taken that night
+     * @param signs dream signs
+     * @param env environment in the dream
+     * @param themes dream themes
+     * @param fAwake number of false awakenings
+     * @param lucid whether I was lucid
+     * @param normal normal dream
+     * @param nightmare nightmare
+     * @param wet wet dream
+     * @param mads mads was there
+     * @param paralysis sleep paralysis
+     */
+    public static void insertDream(String content, String title, int hours, int quality,
+                                   String sleepTime, String wakeTime, String moodB,
+                                   String moodA, String method, String subs, String signs,
+                                   String env, String themes, int fAwake, boolean lucid,
+                                   boolean normal, boolean nightmare, boolean wet,
+                                   boolean mads, boolean paralysis) {
+
+        // 20 Question marks for 20 pieces of data!
+        String sql = "INSERT INTO dreams(content, title, hours_slept, quality, sleep_time, wake_time, mood_before, mood_after, method_used, substances, dream_signs, environment, themes, false_awakenings, is_lucid, is_normal, is_nightmare, is_wet, mads, paralysis) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+        try (Connection conn = connect(); java.sql.PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, content);
+            pstmt.setString(2, title);
+            pstmt.setInt(3, hours);
+            pstmt.setInt(4, quality);
+            pstmt.setString(5, sleepTime);
+            pstmt.setString(6, wakeTime);
+            pstmt.setString(7, moodB);
+            pstmt.setString(8, moodA);
+            pstmt.setString(9, method);
+            pstmt.setString(10, subs);
+            pstmt.setString(11, signs);
+            pstmt.setString(12, env);
+            pstmt.setString(13, themes);
+            pstmt.setInt(14, fAwake);
+            pstmt.setBoolean(15, lucid);
+            pstmt.setBoolean(16, normal);
+            pstmt.setBoolean(17, nightmare);
+            pstmt.setBoolean(18, wet);
+            pstmt.setBoolean(19, mads);
+            pstmt.setBoolean(20, paralysis);
+
+            pstmt.executeUpdate();
+            System.out.println("SUCCESS: Massive dream file locked in the vault!");
+
+        } catch (SQLException e) {
+            System.out.println("Error saving dream: " + e.getMessage());
         }
     }
 }
