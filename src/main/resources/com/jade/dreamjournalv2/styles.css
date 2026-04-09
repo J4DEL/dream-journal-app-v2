@@ -149,3 +149,63 @@
     -fx-background-color: #b388ff;
     -fx-text-fill: #121216;
 }
+
+/* --- 9. THE ARCHIVE LIST --- */
+.list-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #333333;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-padding: 5px;
+}
+
+/* Styles each individual row in the list */
+.list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 16px;
+    -fx-padding: 12px;
+    /* Adds a subtle line between each dream */
+    -fx-border-color: transparent transparent #333333 transparent;
+    -fx-border-width: 1px;
+}
+
+/* When you click on a dream in the list */
+.list-view .list-cell:selected {
+    -fx-background-color: #b388ff;
+    -fx-text-fill: #121216; /* Turns text dark against the purple highlight */
+    -fx-font-weight: bold;
+    -fx-background-radius: 5px;
+}
+
+/* Fixes the ListView scrollbar to match our dark theme */
+.list-view .scroll-bar:vertical .track,
+.list-view .scroll-bar:vertical .track-background {
+    -fx-background-color: transparent;
+}
+.list-view .scroll-bar:vertical .thumb {
+    -fx-background-color: #333333;
+    -fx-background-radius: 5px;
+}
+
+/* --- 10. DESTRUCTIVE BUTTONS (Delete) --- */
+.delete-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ff4d4d; /* Bright danger red */
+    -fx-border-color: #ff4d4d;
+    -fx-border-width: 2px;
+    -fx-border-radius: 25px; /* Keeps the matching pill shape */
+    -fx-background-radius: 25px;
+
+    /* Makes it physically smaller than your standard buttons */
+    -fx-padding: 6px 20px;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+/* Fills solid red when they hover over it */
+.delete-button:hover {
+    -fx-background-color: #ff4d4d;
+    -fx-text-fill: #121216; /* Inverts text to dark */
+}
