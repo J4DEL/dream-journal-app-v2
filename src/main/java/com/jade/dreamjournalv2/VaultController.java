@@ -107,12 +107,33 @@ public class VaultController {
                     moodB, moodA, method, subs, signs, env, themes, fAwake,
                     isLucid, isNorm, isNightmare, isWet, isMads, isPara);
 
-            // 4. ANTI-SPAM: Wipe the text box clean so they know it worked
+            // 4. ANTI-SPAM: Wipe EVERY single UI element clean
             dreamInput.clear();
             dreamTitleInput.clear();
-            // (You can add .clear() for your other text fields here too if you want!)
+            hoursInput.clear();
+            qualityInput.clear();
+            sleepTimeInput.clear();
+            wakeTimeInput.clear();
+            signsInput.clear();
+            substanceInput.clear();
+            environmentInput.clear();
+            themesInput.clear();
+            fAwakenInput.clear();
 
-            System.out.println("Dream securely saved to Journal!");
+            // Uncheck all checkboxes
+            lucidToggle.setSelected(false);
+            normToggle.setSelected(false);
+            nightmareToggle.setSelected(false);
+            wetToggle.setSelected(false);
+            madsToggle.setSelected(false);
+            paralysisToggle.setSelected(false);
+
+            // Reset dropdowns to their default states
+            moodBeforeInput.setValue("Neutral");
+            moodAfterInput.setValue("Neutral");
+            methodUsedInput.setValue("None");
+
+            System.out.println("Dream securely saved to Vault! Form wiped clean.");
 
         } catch (Exception e) {
             System.out.println("Encryption failed! " + e.getMessage());
