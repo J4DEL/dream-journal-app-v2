@@ -16,6 +16,7 @@ public class DreamJournalApplication extends Application {
         stage.setScene(scene);
         // Initialize the database before showing the UI
         DatabaseManager.initializeDatabase();
+        stage.setMaximized(true);
         stage.show();
     }
 }

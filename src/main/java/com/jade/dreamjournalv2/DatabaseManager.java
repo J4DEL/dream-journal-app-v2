@@ -195,19 +195,20 @@ public class DatabaseManager {
     public static java.util.List<DreamEntry> getAllDreams() {
         java.util.List<DreamEntry> dreamList = new java.util.ArrayList<>();
 
-        // Grab the ID, Title, Date, and Encrypted Text, ordered by newest first!
-        String sql = "SELECT id, title, date_logged, content FROM dreams ORDER BY date_logged DESC";
+        // Grab EVERYTHING!
+        String sql = "SELECT * FROM dreams ORDER BY date_logged DESC";
 
-        try (Connection conn = connect();
-             Statement stmt = conn.createStatement();
-             java.sql.ResultSet rs = stmt.executeQuery(sql)) {
-
+        try (Connection conn = connect(); Statement stmt = conn.createStatement(); java.sql.ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 dreamList.add(new DreamEntry(
-                        rs.getInt("id"),
-                        rs.getString("title"),
-                        rs.getString("date_logged"),
-                        rs.getString("content")
+                        rs.getInt("id"), rs.getString("title"), rs.getString("date_logged"),
+                        rs.getString("content"), rs.getInt("hours_slept"), rs.getInt("quality"),
+                        rs.getString("sleep_time"), rs.getString("wake_time"), rs.getString("mood_before"),
+                        rs.getString("mood_after"), rs.getString("method_used"), rs.getString("substances"),
+                        rs.getString("dream_signs"), rs.getString("environment"), rs.getString("themes"),
+                        rs.getInt("false_awakenings"), rs.getBoolean("is_lucid"), rs.getBoolean("is_normal"),
+                        rs.getBoolean("is_nightmare"), rs.getBoolean("is_wet"), rs.getBoolean("mads"),
+                        rs.getBoolean("paralysis")
                 ));
             }
         } catch (SQLException e) {

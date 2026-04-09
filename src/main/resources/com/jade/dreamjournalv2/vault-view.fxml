@@ -12,14 +12,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jade.dreamjournalv2.VaultController">
+<AnchorPane stylesheets="@styles.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jade.dreamjournalv2.VaultController">
    <children>
       <TextArea fx:id="dreamInput" layoutX="27.0" layoutY="27.0" wrapText="true" AnchorPane.bottomAnchor="300.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="380.0" AnchorPane.topAnchor="27.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextArea>
-      <AnchorPane layoutX="27.0" layoutY="519.0" prefHeight="174.0" prefWidth="1173.0" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="0.0">
+      <AnchorPane layoutX="27.0" layoutY="519.0" prefHeight="174.0" prefWidth="825.0" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="380.0">
          <children>
             <VBox prefHeight="174.0" prefWidth="1173.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
@@ -71,7 +71,7 @@
             </VBox>
          </children>
       </AnchorPane>
-      <VBox layoutX="855.0" layoutY="27.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="27.0">
+      <VBox layoutX="855.0" layoutY="27.0" prefHeight="773.0" prefWidth="335.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="27.0">
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="335.0">
                <children>
@@ -81,7 +81,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="284.0">
                <children>
-                  <Label prefHeight="44.0" prefWidth="112.0" text="Hours Slept:" textFill="WHITE" />
+                  <Label prefHeight="44.0" prefWidth="112.0" text="Time Slept:" textFill="WHITE" />
                   <TextField fx:id="hoursInput" alignment="CENTER" prefHeight="42.0" prefWidth="55.0">
                      <HBox.margin>
                         <Insets right="14.0" />
@@ -164,11 +164,20 @@
                   <CheckBox fx:id="paralysisToggle" mnemonicParsing="false" prefHeight="69.0" prefWidth="150.0" text="Paralysis" />
                </children>
             </HBox>
+            <HBox alignment="CENTER" prefHeight="81.0" prefWidth="335.0">
+               <children>
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#onArchiveClick" prefHeight="43.0" prefWidth="178.0" text="Read Dreams">
+                     <HBox.margin>
+                        <Insets right="18.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
-      <HBox alignment="CENTER" layoutX="518.0" layoutY="705.0" prefHeight="57.0" prefWidth="165.0" AnchorPane.bottomAnchor="38.0" AnchorPane.leftAnchor="518.0" AnchorPane.rightAnchor="517.0">
+      <HBox alignment="CENTER" layoutX="518.0" layoutY="734.0" prefHeight="57.0" prefWidth="165.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="518.0" AnchorPane.rightAnchor="517.0">
          <children>
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#onSaveClick" prefHeight="53.0" prefWidth="168.0" text="Save Dream" />
+            <Button fx:id="saveBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onSaveClick" prefHeight="53.0" prefWidth="168.0" text="Save Dream" />
          </children>
       </HBox>
    </children>

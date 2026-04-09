@@ -209,3 +209,16 @@
     -fx-background-color: #ff4d4d;
     -fx-text-fill: #121216; /* Inverts text to dark */
 }
+
+/* --- 11. SPLIT PANE OVERRIDES --- */
+.split-pane {
+    -fx-background-color: #121216;
+}
+.split-pane > .split-pane-divider {
+    -fx-background-color: #333333; /* The color of the draggable bar */
+    -fx-padding: 0 1px 0 1px; /* Makes the bar thinner and cleaner */
+}
+/* Targets the invisible AnchorPanes inside the SplitPane */
+.split-pane > .split-pane-divider + * {
+    -fx-background-color: #121216;
+}

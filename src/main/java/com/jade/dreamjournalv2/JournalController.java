@@ -72,7 +72,7 @@ public class JournalController {
     private void loadDashboard() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(DreamJournalApplication.class.getResource("vault-view.fxml"));
-            Scene vaultScene = new Scene(fxmlLoader.load(), 1200, 800);
+            Scene vaultScene = new Scene(fxmlLoader.load());
             Stage stage = (Stage) passwordInput.getScene().getWindow();
             stage.setScene(vaultScene);
             stage.setMaximized(true);

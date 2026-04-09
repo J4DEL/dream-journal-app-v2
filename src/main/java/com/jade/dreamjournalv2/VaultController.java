@@ -1,7 +1,10 @@
 package com.jade.dreamjournalv2;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class VaultController {
 
@@ -116,6 +119,18 @@ public class VaultController {
         } finally {
             // 5. ANTI-SPAM: Turn the button back on so they can log their next dream
             saveBtn.setDisable(false);
+        }
+    }
+
+    // --- OPEN ARCHIVE BUTTON ---
+    @FXML
+    protected void onArchiveClick() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(DreamJournalApplication.class.getResource("archive-view.fxml"));
+            // We just swap the root canvas, we don't touch the window!
+            saveBtn.getScene().setRoot(fxmlLoader.load());
+        } catch (Exception e) {
+            System.out.println("Error loading archive: " + e.getMessage());
         }
     }
 }
