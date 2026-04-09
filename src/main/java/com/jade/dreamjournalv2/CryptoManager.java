@@ -90,4 +90,18 @@ public class CryptoManager {
         byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
         return new String(decryptedBytes);
     }
+
+    /**
+     * Creates an irreversible SHA-256 hash of the password to safely store in the database.
+     */
+    public static String hashPassword(String password) {
+        try {
+            java.security.MessageDigest digest = java.security.MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+            return Base64.getEncoder().encodeToString(hash);
+        } catch (Exception e) {
+            System.out.println("Hashing error: " + e.getMessage());
+            return null;
+        }
+    }
 }

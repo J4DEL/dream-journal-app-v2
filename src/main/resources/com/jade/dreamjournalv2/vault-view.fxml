@@ -19,9 +19,9 @@
             <Font size="18.0" />
          </font>
       </TextArea>
-      <AnchorPane layoutX="27.0" layoutY="519.0" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="300.0">
+      <AnchorPane layoutX="27.0" layoutY="519.0" prefHeight="174.0" prefWidth="1173.0" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="27.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <VBox>
+            <VBox prefHeight="174.0" prefWidth="1173.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="54.0" prefWidth="794.0">
                      <children>

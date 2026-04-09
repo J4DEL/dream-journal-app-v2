@@ -31,6 +31,9 @@ public class VaultController {
     @FXML private CheckBox madsToggle;
     @FXML private CheckBox paralysisToggle;
 
+    // Save button
+    @FXML private Button saveBtn;
+
     // --- BOOT UP SEQUENCE ---
     @FXML
     public void initialize() {
@@ -45,9 +48,74 @@ public class VaultController {
         methodUsedInput.setValue("None");
     }
 
-    // --- THE SAVE BUTTON ---
     @FXML
     protected void onSaveClick() {
-        System.out.println("Save Button Clicked! Ready to lock the dream.");
+        // 1. ANTI-SPAM: Disable the button the microsecond it is clicked
+        saveBtn.setDisable(true);
+
+        String rawDream = dreamInput.getText();
+
+        // 2. ANTI-SPAM: Don't let them save if the main text area is completely empty
+        if (rawDream.trim().isEmpty()) {
+            System.out.println("Cannot save an empty dream!");
+            saveBtn.setDisable(false); // Turn button back on
+            return;
+        }
+
+        // Grab all the other strings...
+        String title = dreamTitleInput.getText();
+        String sleepT = sleepTimeInput.getText();
+        String wakeT = wakeTimeInput.getText();
+        String signs = signsInput.getText();
+        String subs = substanceInput.getText();
+        String env = environmentInput.getText();
+        String themes = themesInput.getText();
+
+        // Safely grab the numbers...
+        int hours = 0, quality = 0, fAwake = 0;
+        try {
+            if (!hoursInput.getText().isEmpty()) hours = Integer.parseInt(hoursInput.getText());
+            if (!qualityInput.getText().isEmpty()) quality = Integer.parseInt(qualityInput.getText());
+            if (!fAwakenInput.getText().isEmpty()) fAwake = Integer.parseInt(fAwakenInput.getText());
+        } catch (NumberFormatException e) {
+            System.out.println("Numbers only in the number boxes!");
+            saveBtn.setDisable(false);
+            return;
+        }
+
+        // Grab Dropdowns & Checkboxes...
+        String moodB = moodBeforeInput.getValue() != null ? moodBeforeInput.getValue() : "None";
+        String moodA = moodAfterInput.getValue() != null ? moodAfterInput.getValue() : "None";
+        String method = methodUsedInput.getValue() != null ? methodUsedInput.getValue() : "None";
+        boolean isLucid = lucidToggle.isSelected();
+        boolean isNorm = normToggle.isSelected();
+        boolean isNightmare = nightmareToggle.isSelected();
+        boolean isWet = wetToggle.isSelected();
+        boolean isMads = madsToggle.isSelected();
+        boolean isPara = paralysisToggle.isSelected();
+
+        // 3. SILENT SECURITY: Grab the password from the SessionManager!
+        String password = UserSession.getKey();
+
+        try {
+            // Encrypt and Save
+            String encryptedDream = CryptoManager.encrypt(rawDream, password);
+            DatabaseManager.insertDream(encryptedDream, title, hours, quality, sleepT, wakeT,
+                    moodB, moodA, method, subs, signs, env, themes, fAwake,
+                    isLucid, isNorm, isNightmare, isWet, isMads, isPara);
+
+            // 4. ANTI-SPAM: Wipe the text box clean so they know it worked
+            dreamInput.clear();
+            dreamTitleInput.clear();
+            // (You can add .clear() for your other text fields here too if you want!)
+
+            System.out.println("Dream securely saved to Journal!");
+
+        } catch (Exception e) {
+            System.out.println("Encryption failed! " + e.getMessage());
+        } finally {
+            // 5. ANTI-SPAM: Turn the button back on so they can log their next dream
+            saveBtn.setDisable(false);
+        }
     }
 }

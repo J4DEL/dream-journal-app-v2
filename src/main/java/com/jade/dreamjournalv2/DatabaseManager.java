@@ -74,8 +74,16 @@ public class DatabaseManager {
                 + " date_logged DATETIME DEFAULT CURRENT_TIMESTAMP\n"
                 + ");";
 
+        // Create a separate table just for app settings (like the master password)
+        String settingsSql = "CREATE TABLE IF NOT EXISTS settings (id INTEGER PRIMARY KEY, password_hash TEXT);";
+
         try (Connection conn = connect(); Statement stmt = conn.createStatement()) {
+            // 1. Create the dreams table
             stmt.execute(sql);
+
+            // 2. Create the settings table
+            stmt.execute(settingsSql);
+
             System.out.println("Mega-Vault database is secure and ready!");
         } catch (SQLException e) {
             System.out.println("Error creating table: " + e.getMessage());
@@ -144,5 +152,40 @@ public class DatabaseManager {
         } catch (SQLException e) {
             System.out.println("Error saving dream: " + e.getMessage());
         }
+    }
+
+    // --- PASSWORD MANAGEMENT ---
+
+    // 1. Check if a password exists yet
+    public static boolean hasMasterPassword() {
+        String sql = "SELECT password_hash FROM settings WHERE id = 1";
+        try (Connection conn = connect(); Statement stmt = conn.createStatement(); java.sql.ResultSet rs = stmt.executeQuery(sql)) {
+            return rs.next() && rs.getString("password_hash") != null;
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    // 2. Save the password hash (Only happens on first boot)
+    public static void saveMasterPassword(String hash) {
+        String sql = "INSERT INTO settings (id, password_hash) VALUES (1, ?)";
+        try (Connection conn = connect(); java.sql.PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, hash);
+            pstmt.executeUpdate();
+            System.out.println("Master Password hash secured!");
+        } catch (SQLException e) {
+            System.out.println("Error saving password: " + e.getMessage());
+        }
+    }
+
+    // 3. Get the hash to verify a login attempt
+    public static String getMasterPasswordHash() {
+        String sql = "SELECT password_hash FROM settings WHERE id = 1";
+        try (Connection conn = connect(); Statement stmt = conn.createStatement(); java.sql.ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) return rs.getString("password_hash");
+        } catch (SQLException e) {
+            System.out.println("Error retrieving password hash: " + e.getMessage());
+        }
+        return null;
     }
 }
