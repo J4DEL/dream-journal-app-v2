@@ -188,4 +188,43 @@ public class DatabaseManager {
         }
         return null;
     }
+
+    // --- ARCHIVE MANAGEMENT ---
+
+    // 4. Fetch all dreams to display in the Archive List
+    public static java.util.List<DreamEntry> getAllDreams() {
+        java.util.List<DreamEntry> dreamList = new java.util.ArrayList<>();
+
+        // Grab the ID, Title, Date, and Encrypted Text, ordered by newest first!
+        String sql = "SELECT id, title, date_logged, content FROM dreams ORDER BY date_logged DESC";
+
+        try (Connection conn = connect();
+             Statement stmt = conn.createStatement();
+             java.sql.ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                dreamList.add(new DreamEntry(
+                        rs.getInt("id"),
+                        rs.getString("title"),
+                        rs.getString("date_logged"),
+                        rs.getString("content")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println("Error loading archive: " + e.getMessage());
+        }
+        return dreamList;
+    }
+
+    // 5. Permanently wipe a dream from the database
+    public static void deleteDream(int id) {
+        String sql = "DELETE FROM dreams WHERE id = ?";
+        try (Connection conn = connect(); java.sql.PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            System.out.println("Dream permanently deleted.");
+        } catch (SQLException e) {
+            System.out.println("Error deleting dream: " + e.getMessage());
+        }
+    }
 }
